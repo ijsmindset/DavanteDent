@@ -233,3 +233,36 @@ footer {
 footer p {
     margin: 5px 0;
 }
+
+/* Cabecera superior: logo a la izquierda, texto al lado */
+.cabecera-superior {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 900px;
+    margin: 0 auto;
+    gap: 15px;
+}
+
+.cabecera-texto {
+    text-align: left;
+}
+
+.cabecera-texto h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.cabecera-texto p {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+}
+
+.logo-imagen {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    padding: 5px;
+    border-radius: 5%;
+    flex-shrink: 0;
+}

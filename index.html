@@ -8,8 +8,13 @@
 <body>
 
     <header>
-        <h1>Davante<strong>Dent</strong></h1>
-        <p>Clinica dental</p>
+        <div class="cabecera-superior">
+            <img src="img/clinica.jpg" alt="Logo DavanteDent" class="logo-imagen">
+            <div class="cabecera-texto">
+                <h1>Clinica <strong>DavanteDent</strong></h1>
+                <p>Clinica dental</p>
+            </div>
+        </div>
         <nav>
             <button id="botonPedirCita">Pedir cita</button>
             <button id="botonCitasDisponibles">Citas disponibles</button>
@@ -78,9 +83,9 @@
                 <br>
 
                 <h3>Observaciones</h3>
-
-                <textarea id="campoObservaciones" rows="3" placeholder="Observaciones..."></textarea>
-                <br>
+                    <textarea id="campoObservaciones" rows="3" placeholder="Observaciones..."></textarea>
+                    <span id="errorObservaciones"></span>
+                    <br>
 
                 <button type="submit" id="botonGuardar">Guardar cita</button>
                 <button type="button" id="botonCancelar">Cancelar</button>
