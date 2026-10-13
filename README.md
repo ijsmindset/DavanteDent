@@ -9,6 +9,6 @@ Aplicación para gestionar citas de la clínica dental DavanteDent.
 - Ver citas guardadas en cookies
 - Modificar y eliminar citas
 - Comprobar que no se solapen las citas
-
+- 
 ## Documentación
 - [Diagrama de clases](docs/diagrama_clases.pdf)
