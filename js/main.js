@@ -1,76 +1,97 @@
 // Variable para saber si estamos modificando una cita
-var idModificando = null;
+let idModificando = null;
 
-// Al cargar la pagina
-window.onload = function () {
+// Empieza cuando el DOM está cargado
+window.addEventListener("DOMContentLoaded", function () {
+
+    // Asigno los eventos de navegación
+    document.getElementById("botonPedirCita").addEventListener("click", mostrarVistaPedirCita);
+    document.getElementById("botonCitasDisponibles").addEventListener("click", mostrarVistaCitasDisponibles);
+
+    // Botón para cancelar
+    document.getElementById("botonCancelar").addEventListener("click", cancelarFormulario);
+
+    // Envío del formulario
+    document.getElementById("formularioCita").addEventListener("submit", function (e) {
+        e.preventDefault();
+        guardarFormulario();
+    });
+
+    // Cargo la vista inicial
     cargarVistaCitas();
-};
+});
 
-// Navegacion entre vistas
-document.getElementById("botonPedirCita").onclick = function () {
+// Navegación entre las dos vistas
+function mostrarVistaPedirCita() {
     document.getElementById("vistaPedirCita").classList.remove("oculto");
     document.getElementById("vistaCitasDisponibles").classList.add("oculto");
-};
+}
 
-document.getElementById("botonCitasDisponibles").onclick = function () {
+function mostrarVistaCitasDisponibles() {
     document.getElementById("vistaPedirCita").classList.add("oculto");
     document.getElementById("vistaCitasDisponibles").classList.remove("oculto");
     cargarVistaCitas();
-};
+}
 
-// Boton cancelar - limpia el formulario
-document.getElementById("botonCancelar").onclick = function () {
+// Formulario de pedir cita
+function cancelarFormulario() {
     limpiarFormulario();
     idModificando = null;
     document.getElementById("botonGuardar").innerText = "Guardar cita";
-};
-
-// Al enviar el formulario
-document.getElementById("formularioCita").onsubmit = function (e) {
-    e.preventDefault();
-    guardarFormulario();
-};
-
-// Limpia el formulario y los mensajes de error
-function limpiarFormulario() {
-    document.getElementById("formularioCita").reset();
-    var errores = document.getElementsByClassName("error");
-    for (var i = 0; i < errores.length; i++) {
-        errores[i].innerText = "";
-    }
-    document.getElementById("mensajeGlobal").innerText = "";
-    document.getElementById("mensajeGlobal").classList.remove("visible");
 }
 
-// Recoge los datos del formulario y valida
+function limpiarFormulario() {
+    document.getElementById("formularioCita").reset();
+
+    // Vacío los mensajes de error de cada campo
+    document.getElementById("errorDia").innerText = "";
+    document.getElementById("errorMes").innerText = "";
+    document.getElementById("errorAnio").innerText = "";
+    document.getElementById("errorHora").innerText = "";
+    document.getElementById("errorMinuto").innerText = "";
+    document.getElementById("errorNombre").innerText = "";
+    document.getElementById("errorApellidos").innerText = "";
+    document.getElementById("errorDni").innerText = "";
+    document.getElementById("errorTelefono").innerText = "";
+    document.getElementById("errorFechaNacimiento").innerText = "";
+    document.getElementById("errorObservaciones").innerText = "";
+
+    // Oculto también el mensaje global si estaba visible
+    let mensajeGlobal = document.getElementById("mensajeGlobal");
+    mensajeGlobal.innerText = "";
+    mensajeGlobal.classList.remove("visible");
+}
+
+
 function guardarFormulario() {
-    // Recogemos los valores
-    var dia = document.getElementById("campoDia").value;
-    var mes = document.getElementById("campoMes").value;
-    var anio = document.getElementById("campoAnio").value;
-    var hora = document.getElementById("campoHora").value;
-    var minuto = document.getElementById("campoMinuto").value;
-    var nombre = document.getElementById("campoNombre").value;
-    var apellidos = document.getElementById("campoApellidos").value;
-    var dni = document.getElementById("campoDni").value;
-    var telefono = document.getElementById("campoTelefono").value;
-    var fechaNacimiento = document.getElementById("campoFechaNacimiento").value;
-    var observaciones = document.getElementById("campoObservaciones").value;
 
-    // Validamos cada campo
-    var errorDia = validarDia(dia);
-    var errorMes = validarMes(mes);
-    var errorAnio = validarAnio(anio);
-    var errorHora = validarHora(hora);
-    var errorMinuto = validarMinuto(minuto);
-    var errorNombre = validarNombre(nombre);
-    var errorApellidos = validarApellidos(apellidos);
-    var errorDni = validarDni(dni);
-    var errorTelefono = validarTelefono(telefono);
-    var errorFechaNacimiento = validarFechaNacimiento(fechaNacimiento);
-    var errorObservaciones = validarObservaciones(observaciones);
+    // Recojo los valores del formulario
+    let dia = document.getElementById("campoDia").value;
+    let mes = document.getElementById("campoMes").value;
+    let anio = document.getElementById("campoAnio").value;
+    let hora = document.getElementById("campoHora").value;
+    let minuto = document.getElementById("campoMinuto").value;
+    let nombre = document.getElementById("campoNombre").value;
+    let apellidos = document.getElementById("campoApellidos").value;
+    let dni = document.getElementById("campoDni").value;
+    let telefono = document.getElementById("campoTelefono").value;
+    let fechaNacimiento = document.getElementById("campoFechaNacimiento").value;
+    let observaciones = document.getElementById("campoObservaciones").value;
 
-    // Mostramos los mensajes de error
+    // Valido cada campo con su función
+    let errorDia = validarDia(dia);
+    let errorMes = validarMes(mes);
+    let errorAnio = validarAnio(anio);
+    let errorHora = validarHora(hora);
+    let errorMinuto = validarMinuto(minuto);
+    let errorNombre = validarNombre(nombre);
+    let errorApellidos = validarApellidos(apellidos);
+    let errorDni = validarDni(dni);
+    let errorTelefono = validarTelefono(telefono);
+    let errorFechaNacimiento = validarFechaNacimiento(fechaNacimiento);
+    let errorObservaciones = validarObservaciones(observaciones);
+
+    // Muestro los mensajes debajo de cada campo
     document.getElementById("errorDia").innerText = errorDia;
     document.getElementById("errorMes").innerText = errorMes;
     document.getElementById("errorAnio").innerText = errorAnio;
@@ -83,7 +104,7 @@ function guardarFormulario() {
     document.getElementById("errorFechaNacimiento").innerText = errorFechaNacimiento;
     document.getElementById("errorObservaciones").innerText = errorObservaciones;
 
-    // Si hay algun error, no seguimos
+    // Si hay algún error, no sigo
     if (errorDia !== "" || errorMes !== "" || errorAnio !== "" ||
         errorHora !== "" || errorMinuto !== "" || errorNombre !== "" ||
         errorApellidos !== "" || errorDni !== "" || errorTelefono !== "" ||
@@ -91,9 +112,15 @@ function guardarFormulario() {
         return;
     }
 
-    // Creamos la cita
-    var id = idModificando !== null ? idModificando : Date.now();
-    var cita = new Cita(
+    // Creo la cita (si estamos modificando, mantengo el id)
+    let id;
+    if (idModificando !== null) {
+        id = idModificando;
+    } else {
+        id = Date.now();
+    }
+
+    let cita = new Cita(
         id,
         parseInt(dia),
         parseInt(mes),
@@ -108,14 +135,15 @@ function guardarFormulario() {
         observaciones
     );
 
-    // Comprobamos solapamiento
+    // Compruebo si ya hay otra cita a la misma hora
     if (haySolapamiento(cita, id)) {
-        document.getElementById("mensajeGlobal").innerText = "Ya existe una cita en esa fecha y hora";
-        document.getElementById("mensajeGlobal").classList.add("visible");
+        let mensajeGlobal = document.getElementById("mensajeGlobal");
+        mensajeGlobal.innerText = "Ya existe una cita en esa fecha y hora";
+        mensajeGlobal.classList.add("visible");
         return;
     }
 
-    // Guardamos o modificamos
+    // Guardo o modifico según el caso
     if (idModificando !== null) {
         modificarCita(cita);
         idModificando = null;
@@ -124,7 +152,7 @@ function guardarFormulario() {
         anadirCita(cita);
     }
 
-    // Limpiamos el formulario y vamos a la vista de citas
+    // Limpio el formulario y voy a la vista de citas
     limpiarFormulario();
     document.getElementById("vistaPedirCita").classList.add("oculto");
     document.getElementById("vistaCitasDisponibles").classList.remove("oculto");
@@ -133,48 +161,90 @@ function guardarFormulario() {
 
 // Pinta la tabla de citas
 function cargarVistaCitas() {
-    var citas = cargarCitas();
-    var cuerpo = document.getElementById("cuerpoTabla");
+    let citas = cargarCitas();
+    let cuerpo = document.getElementById("cuerpoTabla");
     cuerpo.innerHTML = "";
 
+    // Muestro u oculto el mensaje de "no hay citas"
     if (citas.length === 0) {
         document.getElementById("mensajeVacio").style.display = "block";
     } else {
         document.getElementById("mensajeVacio").style.display = "none";
     }
 
-    for (var i = 0; i < citas.length; i++) {
-        var c = citas[i];
-        var fila = document.createElement("tr");
+    // Recorro las citas y creo una fila por cada una
+    for (let i = 0; i < citas.length; i++) {
+        let c = citas[i];
+        let fila = document.createElement("tr");
 
-        var fecha = (c.dia < 10 ? "0" + c.dia : c.dia) + "/" +
-                    (c.mes < 10 ? "0" + c.mes : c.mes) + "/" + c.anio;
-        var hora = (c.hora < 10 ? "0" + c.hora : c.hora) + ":" +
-                   (c.minuto < 10 ? "0" + c.minuto : c.minuto);
+        // Columna 1: orden
+        let tdOrden = document.createElement("td");
+        tdOrden.textContent = i + 1;
+        fila.appendChild(tdOrden);
 
-        fila.innerHTML =
-            "<td>" + (i + 1) + "</td>" +
-            "<td>" + fecha + "</td>" +
-            "<td>" + hora + "</td>" +
-            "<td>" + c.nombre + "</td>" +
-            "<td>" + c.apellidos + "</td>" +
-            "<td>" + c.dni + "</td>" +
-            "<td>" + c.telefono + "</td>" +
-            "<td>" +
-                "<button class='boton-modificar' onclick='prepararModificar(" + c.id + ")'>Modificar</button>" +
-                "<button class='boton-eliminar' onclick='prepararEliminar(" + c.id + ")'>Eliminar</button>" +
-            "</td>";
+        // Columna 2: fecha
+        let tdFecha = document.createElement("td");
+        tdFecha.textContent = c.getFechaFormateada();
+        fila.appendChild(tdFecha);
 
+        // Columna 3: hora
+        let tdHora = document.createElement("td");
+        tdHora.textContent = c.getHoraFormateada();
+        fila.appendChild(tdHora);
+
+        // Columna 4: nombre
+        let tdNombre = document.createElement("td");
+        tdNombre.textContent = c.nombre;
+        fila.appendChild(tdNombre);
+
+        // Columna 5: apellidos
+        let tdApellidos = document.createElement("td");
+        tdApellidos.textContent = c.apellidos;
+        fila.appendChild(tdApellidos);
+
+        // Columna 6: DNI
+        let tdDni = document.createElement("td");
+        tdDni.textContent = c.dni;
+        fila.appendChild(tdDni);
+
+        // Columna 7: teléfono
+        let tdTelefono = document.createElement("td");
+        tdTelefono.textContent = c.telefono;
+        fila.appendChild(tdTelefono);
+
+        // Columna 8: acciones
+        let tdAcciones = document.createElement("td");
+
+        let btnModificar = document.createElement("button");
+        btnModificar.className = "boton-modificar";
+        btnModificar.textContent = "Modificar";
+        btnModificar.setAttribute("data-id", c.id);
+        btnModificar.addEventListener("click", function () {
+            prepararModificar(parseInt(this.getAttribute("data-id")));
+        });
+        tdAcciones.appendChild(btnModificar);
+
+        let btnEliminar = document.createElement("button");
+        btnEliminar.className = "boton-eliminar";
+        btnEliminar.textContent = "Eliminar";
+        btnEliminar.setAttribute("data-id", c.id);
+        btnEliminar.addEventListener("click", function () {
+            prepararEliminar(parseInt(this.getAttribute("data-id")));
+        });
+        tdAcciones.appendChild(btnEliminar);
+
+        fila.appendChild(tdAcciones);
         cuerpo.appendChild(fila);
     }
 }
 
-// Prepara los datos para modificar una cita
+// Prepara el formulario para modificar una cita
 function prepararModificar(id) {
-    var citas = cargarCitas();
-    for (var i = 0; i < citas.length; i++) {
+    let citas = cargarCitas();
+
+    for (let i = 0; i < citas.length; i++) {
         if (citas[i].id === id) {
-            var c = citas[i];
+            let c = citas[i];
             document.getElementById("campoDia").value = c.dia;
             document.getElementById("campoMes").value = c.mes;
             document.getElementById("campoAnio").value = c.anio;
@@ -186,6 +256,7 @@ function prepararModificar(id) {
             document.getElementById("campoTelefono").value = c.telefono;
             document.getElementById("campoFechaNacimiento").value = c.fechaNacimiento;
             document.getElementById("campoObservaciones").value = c.observaciones;
+
             idModificando = id;
             document.getElementById("botonGuardar").innerText = "Modificar cita";
             document.getElementById("vistaPedirCita").classList.remove("oculto");
@@ -194,7 +265,7 @@ function prepararModificar(id) {
     }
 }
 
-// Elimina una cita (pide confirmacion)
+// Elimina la cita después de confirmar
 function prepararEliminar(id) {
     if (confirm("Seguro que quieres eliminar esta cita?")) {
         eliminarCita(id);

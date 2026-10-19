@@ -1,15 +1,15 @@
-// Valida el dia (1 a 31)
+// Valida el día (1 al 31)
 function validarDia(dia) {
     if (dia === "" || isNaN(dia)) {
-        return "El dia es obligatorio";
+        return "El día es obligatorio";
     }
     if (dia < 1 || dia > 31) {
-        return "El dia debe estar entre 1 y 31";
+        return "El día debe estar entre 1 y 31";
     }
     return "";
 }
 
-// Valida el mes (1 a 12)
+// Valida el mes (1 al 12)
 function validarMes(mes) {
     if (mes === "" || isNaN(mes)) {
         return "El mes es obligatorio";
@@ -20,9 +20,9 @@ function validarMes(mes) {
     return "";
 }
 
-// Valida el año (mayor o igual al actual)
+// Valida el año: el actual o más adelante, pero no atrás
 function validarAnio(anio) {
-    var anioActual = new Date().getFullYear();
+    let anioActual = new Date().getFullYear();
     if (anio === "" || isNaN(anio)) {
         return "El año es obligatorio";
     }
@@ -32,7 +32,7 @@ function validarAnio(anio) {
     return "";
 }
 
-// Valida la hora (9 a 20)
+// Valida la hora: de 9 a 20, como horario de atención al cliente
 function validarHora(hora) {
     if (hora === "" || isNaN(hora)) {
         return "La hora es obligatoria";
@@ -54,7 +54,7 @@ function validarMinuto(minuto) {
     return "";
 }
 
-// Valida el nombre (solo letras, minimo 2)
+// Valida el nombre: solo letras y mínimo 2 caracteres
 function validarNombre(nombre) {
     if (nombre === "") {
         return "El nombre es obligatorio";
@@ -62,14 +62,14 @@ function validarNombre(nombre) {
     if (nombre.length < 2) {
         return "El nombre es demasiado corto";
     }
-    var patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-    if (!patron.test(nombre)) {
+    let patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    if (patron.test(nombre) === false) {
         return "El nombre solo puede tener letras";
     }
     return "";
 }
 
-// Valida los apellidos (solo letras, minimo 2)
+// Valida los apellidos: mínimo 2 caracteres y solo letras
 function validarApellidos(apellidos) {
     if (apellidos === "") {
         return "Los apellidos son obligatorios";
@@ -77,14 +77,14 @@ function validarApellidos(apellidos) {
     if (apellidos.length < 2) {
         return "Los apellidos son demasiado cortos";
     }
-    var patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-    if (!patron.test(apellidos)) {
+    let patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    if (patron.test(apellidos) === false) {
         return "Los apellidos solo pueden tener letras";
     }
     return "";
 }
 
-// Valida el DNI (8 numeros + letra correcta)
+// Valida el DNI: 8 números + letra correcta usando el algoritmo módulo 23
 function validarDni(dni) {
     if (dni === "") {
         return "El DNI es obligatorio";
@@ -92,67 +92,69 @@ function validarDni(dni) {
     if (dni.length !== 9) {
         return "El DNI debe tener 9 caracteres";
     }
-    var numeros = dni.substring(0, 8);
-    var letra = dni.charAt(8).toUpperCase();
+    let numeros = dni.substring(0, 8);
+    let letra = dni.charAt(8).toUpperCase();
     if (isNaN(numeros)) {
-        return "Los 8 primeros caracteres deben ser numeros";
+        return "Los 8 primeros caracteres deben ser números";
     }
-    var letras = "TRWAGMYFPDXBNJZSQVHLCKE";
-    var indice = parseInt(numeros) % 23;
+    let letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+    let indice = parseInt(numeros) % 23;
     if (letras.charAt(indice) !== letra) {
         return "La letra del DNI no es correcta";
     }
     return "";
 }
 
-// Valida el telefono (9 digitos, empieza por 6, 7 o 9)
+// Valida el teléfono: 9 dígitos y que empiece por 6, 7 o 9
 function validarTelefono(telefono) {
     if (telefono === "") {
-        return "El telefono es obligatorio";
+        return "El teléfono es obligatorio";
     }
     if (telefono.length !== 9) {
-        return "El telefono debe tener 9 digitos";
+        return "El teléfono debe tener 9 dígitos";
     }
     if (isNaN(telefono)) {
-        return "El telefono solo puede tener numeros";
+        return "El teléfono solo puede tener números";
     }
-    var primera = telefono.charAt(0);
+    let primera = telefono.charAt(0);
     if (primera !== "6" && primera !== "7" && primera !== "9") {
-        return "El telefono debe empezar por 6, 7 o 9";
+        return "El teléfono debe empezar por 6, 7 o 9";
     }
     return "";
 }
 
-// Valida la fecha de nacimiento (formato DD/MM/AAAA y anterior a hoy)
+// Valida la fecha de nacimiento. El input type="date" la devuelve como AAAA-MM-DD
 function validarFechaNacimiento(fecha) {
     if (fecha === "") {
         return "La fecha de nacimiento es obligatoria";
     }
-    var partes = fecha.split("/");
+    let partes = fecha.split("-");
     if (partes.length !== 3) {
-        return "El formato debe ser DD/MM/AAAA";
+        return "La fecha no es válida";
     }
-    var dia = parseInt(partes[0]);
-    var mes = parseInt(partes[1]);
-    var anio = parseInt(partes[2]);
+    let anio = parseInt(partes[0]);
+    let mes = parseInt(partes[1]);
+    let dia = parseInt(partes[2]);
+
     if (isNaN(dia) || isNaN(mes) || isNaN(anio)) {
-        return "La fecha no es valida";
+        return "La fecha no es válida";
     }
     if (dia < 1 || dia > 31 || mes < 1 || mes > 12 || anio < 1900) {
-        return "La fecha no es valida";
+        return "La fecha no es válida";
     }
-    var hoy = new Date();
-    var fechaNac = new Date(anio, mes - 1, dia);
+
+    let hoy = new Date();
+    let fechaNac = new Date(anio, mes - 1, dia);
     if (fechaNac >= hoy) {
         return "La fecha debe ser anterior a hoy";
     }
     return "";
 }
 
-// Valida las observaciones (opcional, maximo 200 caracteres)
+// Valida las observaciones: máximo 300 caracteres
 function validarObservaciones(observaciones) {
-    if (observaciones.length > 200) {
-        return "Las observaciones no pueden superar 200 caracteres";
+    if (observaciones.length > 300) {
+        return "Las observaciones no pueden superar 300 caracteres";
     }
     return "";
 }

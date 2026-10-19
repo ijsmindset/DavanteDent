@@ -6,8 +6,8 @@
     <title>DavanteDent</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
 
+<body>
     <header>
         <div class="cabecera-superior">
             <img src="img/clinica.jpg" alt="Logo DavanteDent" class="logo-imagen">
@@ -21,83 +21,64 @@
             <button id="botonCitasDisponibles">Citas disponibles</button>
         </nav>
     </header>
-
     <main>
-
         <section id="vistaPedirCita">
             <h2>Nueva cita</h2>
-
             <form id="formularioCita">
-
                 <h3>Datos de la cita</h3>
-
                 <label for="campoDia">Dia:</label>
                 <input type="number" id="campoDia" placeholder="DD" min="1" max="31">
                 <span id="errorDia"></span>
                 <br>
-
                 <label for="campoMes">Mes:</label>
                 <input type="number" id="campoMes" placeholder="MM" min="1" max="12">
                 <span id="errorMes"></span>
                 <br>
-
                 <label for="campoAnio">Año:</label>
                 <input type="number" id="campoAnio" placeholder="AAAA" min="2026">
                 <span id="errorAnio"></span>
                 <br>
-
                 <label for="campoHora">Hora:</label>
                 <input type="number" id="campoHora" placeholder="HH" min="9" max="20">
                 <span id="errorHora"></span>
                 <br>
-
                 <label for="campoMinuto">Minuto:</label>
                 <input type="number" id="campoMinuto" placeholder="MM" min="0" max="59">
                 <span id="errorMinuto"></span>
                 <br>
-
                 <h3>Datos del paciente</h3>
-
                 <label for="campoNombre">Nombre:</label>
                 <input type="text" id="campoNombre" placeholder="pepito">
                 <span id="errorNombre"></span>
                 <br>
-
                 <label for="campoApellidos">Apellidos:</label>
                 <input type="text" id="campoApellidos" placeholder="buen curro">
                 <span id="errorApellidos"></span>
                 <br>
-
                 <label for="campoDni">DNI:</label>
                 <input type="text" id="campoDni" placeholder="12345678Z" maxlength="9">
                 <span id="errorDni"></span>
                 <br>
-
                 <label for="campoTelefono">Telefono:</label>
                 <input type="text" id="campoTelefono" placeholder="600000000" maxlength="9">
                 <span id="errorTelefono"></span>
                 <br>
-
                 <label for="campoFechaNacimiento">Fecha nacimiento:</label>
-                <input type="text" id="campoFechaNacimiento" placeholder="DD/MM/AAAA">
+                <input type="date" id="campoFechaNacimiento">
                 <span id="errorFechaNacimiento"></span>
                 <br>
-
                 <h3>Observaciones</h3>
-                    <textarea id="campoObservaciones" rows="3" placeholder="Observaciones..."></textarea>
-                    <span id="errorObservaciones"></span>
-                    <br>
-
+                <textarea id="campoObservaciones" rows="3" placeholder="Observaciones..."></textarea>
+                <span id="errorObservaciones"></span>
+                <br>
                 <button type="submit" id="botonGuardar">Guardar cita</button>
                 <button type="button" id="botonCancelar">Cancelar</button>
-
                 <div id="mensajeGlobal"></div>
             </form>
         </section>
 
         <section id="vistaCitasDisponibles" class="oculto">
             <h2>Citas disponibles</h2>
-
             <table id="tablaCitas">
                 <thead>
                     <tr>
@@ -111,14 +92,10 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="cuerpoTabla">
-                    <!-- aqui van las citas -->
-                </tbody>
+                <tbody id="cuerpoTabla"></tbody>
             </table>
-
             <p id="mensajeVacio">No hay citas registradas</p>
         </section>
-
     </main>
 
     <footer>

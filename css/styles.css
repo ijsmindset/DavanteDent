@@ -235,6 +235,7 @@ footer p {
 }
 
 /* Cabecera superior: logo a la izquierda, texto al lado */
+
 .cabecera-superior {
     display: flex;
     align-items: center;
