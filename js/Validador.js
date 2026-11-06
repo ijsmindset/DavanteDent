@@ -54,7 +54,7 @@ function validarMinuto(minuto) {
     return "";
 }
 
-// Valida el nombre: solo letras y mínimo 2 caracteres
+// Valida el nombre solo letras y mínimo 2 caracteres
 function validarNombre(nombre) {
     if (nombre === "") {
         return "El nombre es obligatorio";
@@ -84,7 +84,7 @@ function validarApellidos(apellidos) {
     return "";
 }
 
-// Valida el DNI: 8 números + letra correcta usando el algoritmo módulo 23
+// Valida el DNI: 8 números + letra correcta usando el algoritmo módulo 23 buscado en internet para validar la letra del DNI
 function validarDni(dni) {
     if (dni === "") {
         return "El DNI es obligatorio";

@@ -1,10 +1,10 @@
 // Variable para saber si estamos modificando una cita
 let idModificando = null;
 
-// Empieza cuando el DOM está cargado
+// Empieza cuando el DOM esta cargado
 window.addEventListener("DOMContentLoaded", function () {
 
-    // Asigno los eventos de navegación
+    // Asigno los eventos de navegacion
     document.getElementById("botonPedirCita").addEventListener("click", mostrarVistaPedirCita);
     document.getElementById("botonCitasDisponibles").addEventListener("click", mostrarVistaCitasDisponibles);
 

@@ -25,50 +25,53 @@
         <section id="vistaPedirCita">
             <h2>Nueva cita</h2>
             <form id="formularioCita">
+
                 <h3>Datos de la cita</h3>
                 <label for="campoDia">Dia:</label>
-                <input type="number" id="campoDia" placeholder="DD" min="1" max="31">
+                <input type="number" id="campoDia" placeholder="DD" min="1" max="31" required>
                 <span id="errorDia"></span>
                 <br>
                 <label for="campoMes">Mes:</label>
-                <input type="number" id="campoMes" placeholder="MM" min="1" max="12">
+                <input type="number" id="campoMes" placeholder="MM" min="1" max="12" required>
                 <span id="errorMes"></span>
                 <br>
                 <label for="campoAnio">Año:</label>
-                <input type="number" id="campoAnio" placeholder="AAAA" min="2026">
+                <input type="number" id="campoAnio" placeholder="AAAA" min="2026" required>
                 <span id="errorAnio"></span>
                 <br>
                 <label for="campoHora">Hora:</label>
-                <input type="number" id="campoHora" placeholder="HH" min="9" max="20">
+                <input type="number" id="campoHora" placeholder="HH" min="9" max="20" required>
                 <span id="errorHora"></span>
                 <br>
                 <label for="campoMinuto">Minuto:</label>
-                <input type="number" id="campoMinuto" placeholder="MM" min="0" max="59">
+                <input type="number" id="campoMinuto" placeholder="MM" min="0" max="59" required>
                 <span id="errorMinuto"></span>
                 <br>
+
                 <h3>Datos del paciente</h3>
                 <label for="campoNombre">Nombre:</label>
-                <input type="text" id="campoNombre" placeholder="pepito">
+                <input type="text" id="campoNombre" placeholder="pepito" required minlength="2">
                 <span id="errorNombre"></span>
                 <br>
                 <label for="campoApellidos">Apellidos:</label>
-                <input type="text" id="campoApellidos" placeholder="buen curro">
+                <input type="text" id="campoApellidos" placeholder="buen curro" required minlength="2">
                 <span id="errorApellidos"></span>
                 <br>
                 <label for="campoDni">DNI:</label>
-                <input type="text" id="campoDni" placeholder="12345678Z" maxlength="9">
+                <input type="text" id="campoDni" placeholder="12345678Z" maxlength="9" required>
                 <span id="errorDni"></span>
                 <br>
                 <label for="campoTelefono">Telefono:</label>
-                <input type="text" id="campoTelefono" placeholder="600000000" maxlength="9">
+                <input type="text" id="campoTelefono" placeholder="600000000" maxlength="9" required>
                 <span id="errorTelefono"></span>
                 <br>
                 <label for="campoFechaNacimiento">Fecha nacimiento:</label>
-                <input type="date" id="campoFechaNacimiento">
+                <input type="date" id="campoFechaNacimiento" required>
                 <span id="errorFechaNacimiento"></span>
                 <br>
+
                 <h3>Observaciones</h3>
-                <textarea id="campoObservaciones" rows="3" placeholder="Observaciones..."></textarea>
+                <textarea id="campoObservaciones" rows="3" placeholder="Observaciones..." maxlength="300"></textarea>
                 <span id="errorObservaciones"></span>
                 <br>
                 <button type="submit" id="botonGuardar">Guardar cita</button>
